@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RideGo - Ojek Online Cepat & Aman</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        color: #333;
+      }
+
+      /* Header & Navigation */
+      nav {
+        position: fixed;
+        width: 100%;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #667eea;
+      }
+
+      .cta-button {
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+      }
+
+      .hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.phone-mockup {
+  width: 250px;
+  height: 450px;
+  border: 12px solid #000;
+  border-radius: 40px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.phone-screen {
+  text-align: center;
+  font-size: 18px;
+  color: #333;
+}
+
+.app-image {
+  width: 150px; /* ubah ukuran sesuai kebutuhan */
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 100px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        top: -200px;
+        right: -200px;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        bottom: -100px;
+        left: -100px;
+        animation: float 8s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-30px);
+        }
+      }
+
+      .hero-content {
+        flex: 1;
+        z-index: 2;
+        animation: slideInLeft 1s ease-out;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .hero-content h1 {
+        font-size: 58px;
+        color: white;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      .hero-content p {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 30px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+      }
+
+      .primary-btn {
+        padding: 15px 40px;
+        background: white;
+        color: #667eea;
+        border: none;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .primary-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .secondary-btn {
+        padding: 15px 40px;
+        background: transparent;
+        color: white;
+        border: 2px solid white;
+        border-radius: 30px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .secondary-btn:hover {
+        background: white;
+        color: #667eea;
+      }
+
+      .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+      }
+
+      .phone-mockup {
+        width: 350px;
+        height: 700px;
+        background: white;
+        border-radius: 40px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        animation: slideInRight 1s ease-out;
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .phone-screen {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        font-weight: 600;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 100px 50px;
+        background: #f8f9fa;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 42px;
+        margin-bottom: 60px;
+        color: #333;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .feature-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+
+      .feature-card h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .feature-card p {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* How It Works Section */
+      .how-it-works {
+        padding: 100px 50px;
+        background: white;
+      }
+
+      .steps {
+        display: flex;
+        justify-content: space-around;
+        max-width: 1200px;
+        margin: 0 auto;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+
+      .step {
+        flex: 1;
+        min-width: 250px;
+        text-align: center;
+        padding: 30px;
+        position: relative;
+      }
+
+      .step-number {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0 auto 20px;
+      }
+
+      .step h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+
+      .step p {
+        color: #666;
+        line-height: 1.6;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: 100px 50px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        text-align: center;
+        color: white;
+      }
+
+      .cta-section h2 {
+        font-size: 42px;
+        margin-bottom: 20px;
+      }
+
+      .cta-section p {
+        font-size: 20px;
+        margin-bottom: 40px;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      footer {
+        background: #1a1a1a;
+        color: white;
+        padding: 50px;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+
+      .footer-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: #667eea;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        nav {
+          padding: 20px;
+        }
+
+        .hero {
+          flex-direction: column;
+          padding: 120px 20px 50px;
+          height: auto;
+          text-align: center;
+        }
+
+        .hero-content h1 {
+          font-size: 36px;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+        }
+
+        .phone-mockup {
+          width: 280px;
+          height: 560px;
+        }
+
+        .section-title {
+          font-size: 32px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">🏍️ RideGo</div>
+      <ul class="nav-links">
+        <li><a href="#home">Beranda</a></li>
+        <li><a href="#features">Fitur</a></li>
+        <li><a href="#how">Cara Kerja</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+      <button class="cta-button" onclick="downloadApp()">Download App</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Perjalanan Cepat,<br />Aman & Terpercaya</h1>
+        <p>Pesan ojek online dalam hitungan detik. Nikmati perjalanan nyaman dengan driver profesional ke seluruh kota.</p>
+        <div class="hero-buttons">
+          <button class="primary-btn" onclick="orderNow()">Pesan Sekarang</button>
+          <button class="secondary-btn" onclick="learnMore()">Pelajari Lebih Lanjut</button>
+        </div>
+      </div>
+      <div class="hero-image">
+  <div class="phone-mockup">
+    <div class="phone-screen">
+      <img src="Ojek.jpeg" alt="RideGo App" class="app-image" />
+      <p><br />RideGo App</p>
+    </div>
+  </div>
+</div>
+
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <h2 class="section-title">Kenapa Memilih RideGo?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Cepat & Efisien</h3>
+          <p>Driver terdekat akan menjemput Anda dalam hitungan menit. Hemat waktu untuk perjalanan penting Anda.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Aman & Terpercaya</h3>
+          <p>Semua driver telah terverifikasi dan diasuransikan. Perjalanan Anda adalah prioritas kami.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Harga Transparan</h3>
+          <p>Tanpa biaya tersembunyi. Lihat estimasi harga sebelum memesan dan bayar dengan berbagai metode.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🌟</div>
+          <h3>Layanan 24/7</h3>
+          <p>Tersedia kapan saja, di mana saja. Kami siap melayani kebutuhan transportasi Anda setiap saat.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>GPS Real-time</h3>
+          <p>Lacak posisi driver secara real-time. Tahu persis kapan driver akan tiba di lokasi Anda.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎁</div>
+          <h3>Promo Menarik</h3>
+          <p>Dapatkan diskon dan cashback setiap hari. Semakin sering pakai, semakin banyak untung!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how">
+      <h2 class="section-title">Cara Memesan</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Buka Aplikasi</h3>
+          <p>Download dan buka aplikasi RideGo di smartphone Anda</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Pilih Tujuan</h3>
+          <p>Masukkan lokasi penjemputan dan tujuan Anda</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Pesan Driver</h3>
+          <p>Pilih jenis layanan dan konfirmasi pesanan Anda</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Nikmati Perjalanan</h3>
+          <p>Driver akan menjemput dan mengantar Anda dengan aman</p>
+        </div>
+      </div>
+      <div class="order-form" style="margin-top: 40px; max-width: 400px; margin:auto; background:#f9f9f9; padding:25px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+  <h3 style="text-align:center; color:#2a9d8f;">Formulir Pemesanan Ojek Online</h3>
+  <form action="simpanpesanan.php" method="POST">
+    
+    <label>Nama Lengkap:</label><br>
+    <input type="text" name="nama" placeholder="Masukkan nama lengkap" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc;"><br><br>
+
+    <label>No WhatsApp:</label><br>
+    <input type="text" name="no_wa" placeholder="Masukkan nomor WhatsApp aktif" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc;"><br><br>
+
+    <label>Alamat Penjemputan:</label><br>
+    <input type="text" name="alamat_jemput" placeholder="Lokasi penjemputan" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc;"><br><br>
+
+    <label>Tujuan:</label><br>
+    <input type="text" name="tujuan" placeholder="Lokasi tujuan" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc;"><br><br>
+
+    <label>Waktu Jemput:</label><br>
+    <input type="datetime-local" name="waktu_jemput" required style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc;"><br><br>
+
+    <label>Catatan (opsional):</label><br>
+    <textarea name="catatan" rows="4" placeholder="Contoh: Tolong bawa helm cadangan" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc;"></textarea><br><br>
+
+    <button type="submit" style="width:100%; background-color:#2a9d8f; color:#fff; padding:12px; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">
+      Pesan Sekarang
+    </button>
+  </form>
+</div>
+
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2>Siap Memulai Perjalanan?</h2>
+      <p>Download aplikasi RideGo sekarang dan nikmati kemudahan transportasi online</p>
+      <button class="primary-btn" onclick="downloadApp()">Download Gratis</button>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#">Tentang Kami</a>
+          <a href="#">Bantuan</a>
+          <a href="#">Karir</a>
+          <a href="#">Syarat & Ketentuan</a>
+          <a href="#">Kebijakan Privasi</a>
+        </div>
+        <p>&copy; 2025 RideGo. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 50) {
+          nav.style.padding = "15px 50px";
+          nav.style.boxShadow = "0 5px 30px rgba(0, 0, 0, 0.15)";
+        } else {
+          nav.style.padding = "20px 50px";
+          nav.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
+        }
+      });
+
+      // Feature cards animation on scroll
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".feature-card, .step").forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(30px)";
+        card.style.transition = "all 0.6s ease";
+        observer.observe(card);
+      });
+
+      // Button functions
+      function orderNow() {
+        alert("Terima kasih! Fitur pemesanan akan segera tersedia. Download aplikasi kami untuk mulai memesan.");
+      }
+
+      function downloadApp() {
+        alert("Download aplikasi RideGo di Google Play Store atau Apple App Store!");
+      }
+
+      function learnMore() {
+        document.querySelector("#features").scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>
